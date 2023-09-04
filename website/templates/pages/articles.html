@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/plugins.html' %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="description" content="{{article.meta}}">
+    <meta name="keywords" content="{{article.keywords}}">
+    <title>{{article.title}}</title>
+</head>
+<body>
+    {% include 'includes/header.html' %}
+    <main>
+        <section class="container" >
+            <div class="shadow-sm py-4 px-2  bg-white" style="min-height:50vh">
+                <h3 class="text-center fw-bold">All Articles</h3>
+                <p class="fs-5 px-4 text-center mt-3">Dive into a treasure trove of captivating articles that promise to inspire and enlighten. Explore expert insights, practical wisdom, and engaging stories that await, 
+                    inviting you to embark on a journey of discovery. Feed your curiosity and expand your horizons with every click.</p>
+                <div class="row gap-1 my-5">
+                    {% for post in articles %}
+                    <div class="col-12 col-md-3">
+                        <div class="card">
+                            <img src="{{post.image.url}}" class="card-img-top" alt=""/>
+                            <div class="card-body">
+                              <h5 class="card-title text-center">{{ post.title }}</h5>
+                              <p class="card-text">{{ post.meta|slice:":100" }} ...</p>
+                              <a href="{% url 'article' post.slug %}" class="btn btn-primary px-4">Learn More</a>
+                            </div>
+                          </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            
+                <nav aria-label="...">
+                    <ul class="pagination mx-auto">
+                        {% if articles.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">&laquo; first</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ articles.previous_page_number }}">previous</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">&laquo; first</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">previous</span>
+                            </li>
+                        {% endif %}
+                                
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">
+                                {{ articles.number }}
+                                <span class="visually-hidden">(current)</span>
+                            </span>
+                        </li>
+                                
+                        {% if articles.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ articles.next_page_number }}">next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">next</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">last &raquo;</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                  
+            </div>
+        </section>
+
+
+
+
+
+
+    </main>
+    {% include 'includes/footer.html' %}
+</body>
+</html>

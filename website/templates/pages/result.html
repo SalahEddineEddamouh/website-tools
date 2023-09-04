@@ -1,0 +1,48 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/plugins.html' %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Home</title>
+</head>
+<body>
+    {% include 'includes/header.html' %}
+    <main>
+        <section class="container" >
+            <div class="shadow-sm py-4 px-2  bg-white" style="min-height:50vh">
+                <div class="row">
+                    <div class="col-10 mx-auto text-center">
+                        <h2>{{ video_title }}</h2>
+                        <img src="{{ thumbnail_url }}" width="100%" style="max-width:700px"  alt="Video Thumbnail">
+                        
+                        <form method="post" action="{% url 'download' %}">
+                            {% csrf_token %}
+                            <br>
+                            <select name="itag" class="select-control">
+                                <option value="22">High Quality (720p)</option>
+                                <option value="18">Standard Quality (360p)</option>
+                                <!-- Add more options based on the available itags -->
+                            </select>
+                            <input type="hidden"  name="url" value="{{video_url}}">
+                            <p>Download it new :</p> 
+                            <input type="submit" value="Download">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+    </main>
+    {% include 'includes/footer.html' %}
+</body>
+</html>

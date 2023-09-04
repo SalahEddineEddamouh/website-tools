@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'includes/plugins.html' %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="description" content="{{article.meta}}">
+    <meta name="keywords" content="{{article.keywords}}">
+    <title>{{article.title}}</title>
+</head>
+<body>
+    {% include 'includes/header.html' %}
+    <main>
+        <section class="container" >
+            <div class="shadow-sm py-4 px-2  bg-white" style="min-height:50vh">
+                <div class="row">
+                    <div class="col-10 mx-auto">
+                        <h2 class="text-center fw-bold mb-3">{{article.title}}</h2>
+                        {% autoescape off %}
+                            {{ article.content|safe }}
+                        {% endautoescape %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+    </main>
+    {% include 'includes/footer.html' %}
+</body>
+</html>

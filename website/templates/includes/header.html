@@ -1,0 +1,24 @@
+
+    <header class="shadow-sm pt-2" style="z-index:10000">
+      <nav class="container py-2">
+        <a href="/" id="logo">Logo</a>
+        <i class="fas fa-bars" id="ham-menu"></i>
+        <ul id="nav-bar">
+          <li>
+            <a href="{% url 'articles' %}">articles</a>
+          </li>
+          <li>
+            <a href="{% url 'home' %}">Youtube downloader</a>
+          </li>
+          <li>
+            <a href="{% url 'privacy' %}">Privacy prolicy</a>
+          </li>
+          <li>
+            <a href="{% url 'conditions' %}">Terms and conditions</a>
+          </li>
+          <li>
+            <a href="{% url 'contact' %}">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
